@@ -57,7 +57,7 @@
     var currentCountdown;
     var currentInterval;
 
-    var running;
+    var running = false;
 
     function start(eventInfo) {
         document.getElementById("startButton").style.display = "none";
@@ -157,6 +157,23 @@
         context.arc(centerX, centerY, fullAmountToShow, 0, 2 * Math.PI, true);
         context.fill();
 
+        context.fillStyle = "white";
+        context.font = "200px Segoe UI";
+
+        var text = currentTime.toString();
+        var textWidth = context.measureText(text).width;
+        context.fillText(text, centerX - textWidth / 2, centerY + 75);
+    }
+
+    function showDebugLines() {
+        context.strokeStyle = "red";
+        context.beginPath();
+        context.moveTo(centerX, 0);
+        context.lineTo(centerX, canvas.height);
+        context.moveTo(0, centerY);
+        context.lineTo(canvas.height, centerY);
+
+        context.stroke();
     }
 
     app.start();
