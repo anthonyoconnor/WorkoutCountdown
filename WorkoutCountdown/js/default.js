@@ -71,8 +71,35 @@
             return;
 
         currentCountdown--;
-        showCountdownTime();
-        setTimeout(updateCountdown, 1000);
+
+        if (currentCountdown == 0) {
+            //play beep
+            showIntervalTime()
+            setTimeout(updateIntervalCountdown, 1000);
+            currentCountdown = countdownSetting;
+        }
+        else {
+            showCountdownTime();
+            setTimeout(updateCountdown, 1000);
+        }
+    }
+
+    function updateIntervalCountdown() {
+        if (!running)
+            return;
+
+        currentInterval--;
+
+        if (currentInterval == 0) {
+            //play beep
+            showCountdownTime()
+            setTimeout(updateCountdown, 1000);
+            currentInterval = intervalSetting;
+        }
+        else {
+            showIntervalTime();
+            setTimeout(updateIntervalCountdown, 1000);
+        }
     }
 
     function showCountdownTime() {
@@ -80,7 +107,7 @@
     }
 
     function showIntervalTime() {
-        document.getElementById("countdown").innerText = currentCountdown;
+        document.getElementById("countdown").innerText = currentInterval;
     }
 
     app.start();

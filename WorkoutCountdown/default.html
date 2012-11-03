@@ -16,9 +16,9 @@
 <body>
     <h1 class="header">Workout Time</h1>
     <div class="controls">
-        <div class="options">
+        <div id="options" class="options">
             <div>Countdown</div>
-            <select>
+            <select id="countdownSeconds">
                 <option>15</option>
                 <option>30</option>
                 <option selected>60</option>
@@ -27,7 +27,7 @@
 
             <div>Rest Interval</div>
 
-            <select>
+            <select id="restIntervalSeconds">
                 <option>5</option>
                 <option>10</option>
                 <option selected>15</option>
@@ -40,7 +40,7 @@
         </div>
     </div>
     <div class="countdown">
-        <canvas id="canvas" height="600" width="600"></canvas>
+        <input id="countdown" />
     </div>
 </body>
 </html>
