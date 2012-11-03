@@ -24,6 +24,8 @@
 
             var stopButton = document.getElementById("stopButton");
             stopButton.addEventListener("click", stop, false);
+
+            document.onkeyup = onkeyup;
         }
     };
 
@@ -35,6 +37,18 @@
         // asynchronous operation before your application is suspended, call
         // args.setPromise().
     };
+
+    function onkeyup(e) {
+        var unicode = e.keyCode ? e.keyCode : e.charCode
+        if (unicode == 32) {
+            if (running) {
+                stop();
+            }
+            else {
+                start();
+            }
+        }
+    }
 
 
     var countdownSetting;
