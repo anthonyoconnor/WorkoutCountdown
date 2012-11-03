@@ -137,21 +137,26 @@
         var centerX = canvas.width / 2;
         var centerY = canvas.height / 2;
 
-        var maxSize = 200;
+        var maxSize = 300;
+        var minSize = 130;
+        var variableAmount = maxSize - minSize;
         var percentage = (currentTime/totalTime  * 100);
-        var amountToShow = 200 / 100 * percentage;
+        var amountToShow = variableAmount / 100 * percentage;
+
+        var fullAmountToShow = amountToShow + minSize
         
         if (increase == true)
         {
-            amountToShow = maxSize - amountToShow;
+            fullAmountToShow = (maxSize - fullAmountToShow) + minSize;
         }
         context.clearRect(0, 0, canvas.width, canvas.height);
 
         context.beginPath();
         context.fillStyle = colour;
  
-        context.arc(centerX, centerY, amountToShow, 0, 2 * Math.PI, true);
+        context.arc(centerX, centerY, fullAmountToShow, 0, 2 * Math.PI, true);
         context.fill();
+
     }
 
     app.start();
