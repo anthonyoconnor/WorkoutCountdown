@@ -1,6 +1,24 @@
 ﻿body {
 }
 
+.header {
+    margin-top: 45px;
+    margin-left: 120px;
+}
+
+.controls {
+    margin-top: 31px;
+    margin-left: 120px;
+    margin-bottom: 50px;
+}
+
+.options {
+}
+
+.buttons {
+    margin-top: 30px;
+}
+
 @media screen and (-ms-view-state: fullscreen-landscape) {
 }
 
