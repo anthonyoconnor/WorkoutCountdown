@@ -18,6 +18,12 @@
                 // Restore application state here.
             }
             args.setPromise(WinJS.UI.processAll());
+
+            var startButton = document.getElementById("startButton");
+            startButton.addEventListener("click", start, false);
+
+            var stopButton = document.getElementById("stopButton");
+            stopButton.addEventListener("click", stop, false);
         }
     };
 
@@ -29,6 +35,14 @@
         // asynchronous operation before your application is suspended, call
         // args.setPromise().
     };
+
+    function start(eventInfo) {
+        document.getElementById("testOutput").innerText = "Start Pushed";
+    }
+
+    function stop(eventInfo) {
+        document.getElementById("testOutput").innerText = "Stop Pushed";
+    }
 
     app.start();
 })();
