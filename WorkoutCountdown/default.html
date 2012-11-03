@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>WorkoutCountdown</title>
+    <title>Workout Countdown</title>
 
     <!-- WinJS references -->
     <link href="//Microsoft.WinJS.1.0/css/ui-dark.css" rel="stylesheet" />
@@ -14,6 +14,29 @@
     <script src="/js/default.js"></script>
 </head>
 <body>
-    <p>Content goes here</p>
+    <h1>Workout Time</h1>
+    <div>Countdown</div>
+
+    <select>
+        <option>15</option>
+        <option>30</option>
+        <option selected>60</option>
+        <option>120</option>
+    </select>
+
+    <div>Rest Interval</div>
+
+    <select>
+        <option>5</option>
+        <option>10</option>
+        <option selected>15</option>
+        <option>30</option>
+    </select>
+
+    <div>
+        <button id="startButton">Start</button>
+        <button id="stopButton" style="display: none">Stop</button>
+    </div>
+
 </body>
 </html>
