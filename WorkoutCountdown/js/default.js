@@ -50,7 +50,7 @@
         }
     }
 
-
+    var defaultIntervalTime = 1000;
     var countdownSetting;
     var intervalSetting;
 
@@ -66,7 +66,7 @@
         reset();
 
         running = true;
-        setTimeout(updateCountdown, 1000);
+        setTimeout(updateCountdown, defaultIntervalTime);
     }
 
     function stop(eventInfo) {
@@ -95,14 +95,13 @@
         currentCountdown--;
 
         if (currentCountdown == 0) {
-            //play beep
             showIntervalTime()
-            setTimeout(updateIntervalCountdown, 1000);
+            setTimeout(updateIntervalCountdown, defaultIntervalTime);
             currentCountdown = countdownSetting;
         }
         else {
             showCountdownTime();
-            setTimeout(updateCountdown, 1000);
+            setTimeout(updateCountdown, defaultIntervalTime);
         }
     }
 
@@ -115,24 +114,24 @@
         if (currentInterval == 0) {
             //play beep
             showCountdownTime()
-            setTimeout(updateCountdown, 1000);
+            setTimeout(updateCountdown, defaultIntervalTime);
             currentInterval = intervalSetting;
         }
         else {
             showIntervalTime();
-            setTimeout(updateIntervalCountdown, 1000);
+            setTimeout(updateIntervalCountdown, defaultIntervalTime);
         }
     }
 
     function showCountdownTime() {
-        showTime(currentCountdown, countdownSetting);
+        showTime(currentCountdown, countdownSetting, false);
     }
 
     function showIntervalTime() {
-        showTime(currentInterval, intervalSetting);
+        showTime(currentInterval, intervalSetting, true);
     }
 
-    function showTime(currentTime, totalTime) {
+    function showTime(currentTime, totalTime, increase) {
         var canvas = document.getElementById("canvas");
         var context = canvas.getContext("2d");
         var centerX = canvas.width / 2;
@@ -141,6 +140,11 @@
         var maxSize = 200;
         var percentage = (currentTime/totalTime  * 100);
         var amountToShow = 200 / 100 * percentage;
+        
+        if (increase == true)
+        {
+            amountToShow = maxSize - amountToShow;
+        }
         context.clearRect(0, 0, canvas.width, canvas.height);
 
         context.beginPath();
