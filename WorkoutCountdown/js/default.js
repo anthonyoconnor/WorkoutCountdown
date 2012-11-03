@@ -124,14 +124,14 @@
     }
 
     function showCountdownTime() {
-        showTime(currentCountdown, countdownSetting, false);
+        showTime(currentCountdown, countdownSetting, false, "red");
     }
 
     function showIntervalTime() {
-        showTime(currentInterval, intervalSetting, true);
+        showTime(currentInterval, intervalSetting, true, "blue");
     }
 
-    function showTime(currentTime, totalTime, increase) {
+    function showTime(currentTime, totalTime, increase, colour) {
         var canvas = document.getElementById("canvas");
         var context = canvas.getContext("2d");
         var centerX = canvas.width / 2;
@@ -148,7 +148,7 @@
         context.clearRect(0, 0, canvas.width, canvas.height);
 
         context.beginPath();
-        context.fillStyle = "rgb(0, 162, 232)";
+        context.fillStyle = colour;
  
         context.arc(centerX, centerY, amountToShow, 0, 2 * Math.PI, true);
         context.fill();
