@@ -37,11 +37,13 @@
     };
 
     function start(eventInfo) {
-        document.getElementById("testOutput").innerText = "Start Pushed";
+        document.getElementById("startButton").style.display = "none";
+        document.getElementById("stopButton").style.display = "inline";
     }
 
     function stop(eventInfo) {
-        document.getElementById("testOutput").innerText = "Stop Pushed";
+        document.getElementById("stopButton").style.display = "none";
+        document.getElementById("startButton").style.display = "inline";
     }
 
     app.start();
