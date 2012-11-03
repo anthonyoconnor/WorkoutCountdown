@@ -63,21 +63,29 @@
         document.getElementById("startButton").style.display = "none";
         document.getElementById("stopButton").style.display = "inline";
 
-        countdownSetting = document.getElementById("countdownSeconds").value;
-        currentCountdown = countdownSetting;
-        intervalSetting = document.getElementById("restIntervalSeconds").value;
-        currentInterval = intervalSetting;
+        reset();
 
-        showCountdownTime();
         running = true;
         setTimeout(updateCountdown, 1000);
     }
 
     function stop(eventInfo) {
         running = false;
-        clearTimeout(updateCountdown);
+        reset();
         document.getElementById("stopButton").style.display = "none";
         document.getElementById("startButton").style.display = "inline";
+    }
+
+    function reset() {
+        countdownSetting = document.getElementById("countdownSeconds").value;
+        currentCountdown = countdownSetting;
+        intervalSetting = document.getElementById("restIntervalSeconds").value;
+        currentInterval = intervalSetting;
+
+        showCountdownTime();
+
+        clearTimeout(updateCountdown);
+        clearTimeout(updateIntervalCountdown);
     }
 
     function updateCountdown() {
