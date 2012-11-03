@@ -36,14 +36,51 @@
         // args.setPromise().
     };
 
+
+    var countdownSetting;
+    var intervalSetting;
+
+    var currentCountdown;
+    var currentInterval;
+
+    var running;
+
     function start(eventInfo) {
         document.getElementById("startButton").style.display = "none";
         document.getElementById("stopButton").style.display = "inline";
+
+        countdownSetting = document.getElementById("countdownSeconds").value;
+        currentCountdown = countdownSetting;
+        intervalSetting = document.getElementById("restIntervalSeconds").value;
+        currentInterval = intervalSetting;
+
+        showCountdownTime();
+        running = true;
+        setTimeout(updateCountdown, 1000);
     }
 
     function stop(eventInfo) {
+        running = false;
+        clearTimeout(updateCountdown);
         document.getElementById("stopButton").style.display = "none";
         document.getElementById("startButton").style.display = "inline";
+    }
+
+    function updateCountdown() {
+        if (!running)
+            return;
+
+        currentCountdown--;
+        showCountdownTime();
+        setTimeout(updateCountdown, 1000);
+    }
+
+    function showCountdownTime() {
+        document.getElementById("countdown").innerText = currentCountdown;
+    }
+
+    function showIntervalTime() {
+        document.getElementById("countdown").innerText = currentCountdown;
     }
 
     app.start();
