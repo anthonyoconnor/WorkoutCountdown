@@ -125,11 +125,29 @@
     }
 
     function showCountdownTime() {
-        document.getElementById("countdown").innerText = currentCountdown;
+        showTime(currentCountdown, countdownSetting);
     }
 
     function showIntervalTime() {
-        document.getElementById("countdown").innerText = currentInterval;
+        showTime(currentInterval, intervalSetting);
+    }
+
+    function showTime(currentTime, totalTime) {
+        var canvas = document.getElementById("canvas");
+        var context = canvas.getContext("2d");
+        var centerX = canvas.width / 2;
+        var centerY = canvas.height / 2;
+
+        var maxSize = 200;
+        var percentage = (currentTime/totalTime  * 100);
+        var amountToShow = 200 / 100 * percentage;
+        context.clearRect(0, 0, canvas.width, canvas.height);
+
+        context.beginPath();
+        context.fillStyle = "rgb(0, 162, 232)";
+ 
+        context.arc(centerX, centerY, amountToShow, 0, 2 * Math.PI, true);
+        context.fill();
     }
 
     app.start();
