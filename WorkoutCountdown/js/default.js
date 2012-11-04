@@ -33,6 +33,11 @@
                     var element = document.getElementById("restIntervalSeconds");
                     element.selectedIndex = restIndex;
                 }
+
+                var playAudioFlag = app.sessionState.playAudioFlag;
+                if (playAudioFlag != undefined) {
+                    playAudio = playAudioFlag;
+                }
             }
             args.setPromise(WinJS.UI.processAll());
 
@@ -59,6 +64,8 @@
 
         var restElement = document.getElementById("restIntervalSeconds");
         app.sessionState.restIndex = restElement.selectedIndex;
+
+        app.sessionState.playAudioFlag = playAudio;
     };
 
     function onkeyup(e) {
@@ -131,8 +138,10 @@
     }
 
     function playBeep() {
-        var beep = document.getElementById('beep');
-        beep.play();
+        if (playAudio) {
+            var beep = document.getElementById('beep');
+            beep.play();
+        }
     }
 
 
@@ -212,3 +221,8 @@
 
     app.start();
 })();
+
+var playAudio = true;
+function toggleAudio() {
+    playAudio = event.srcElement.checked;
+}
