@@ -95,6 +95,7 @@
         currentCountdown--;
 
         if (currentCountdown == 0) {
+            playBeep();
             showIntervalTime()
             setTimeout(updateIntervalCountdown, defaultIntervalTime);
             currentCountdown = countdownSetting;
@@ -105,6 +106,12 @@
         }
     }
 
+    function playBeep() {
+        var beep = document.getElementById('beep');
+        beep.play();
+    }
+
+
     function updateIntervalCountdown() {
         if (!running)
             return;
@@ -112,7 +119,7 @@
         currentInterval--;
 
         if (currentInterval == 0) {
-            //play beep
+            playBeep();
             showCountdownTime()
             setTimeout(updateCountdown, defaultIntervalTime);
             currentInterval = intervalSetting;
@@ -136,8 +143,6 @@
         var context = canvas.getContext("2d");
         var centerX = canvas.width / 2;
         var centerY = canvas.height / 2;
-
-        
 
         var maxSize = (canvas.width < canvas.height ? canvas.width : canvas.height)/2;
         var minSize = 130;
