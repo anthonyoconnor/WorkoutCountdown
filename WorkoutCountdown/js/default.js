@@ -57,7 +57,7 @@
     var currentCountdown;
     var currentInterval;
 
-    var running = false;
+    var running;
 
     function start(eventInfo) {
         document.getElementById("startButton").style.display = "none";
@@ -137,7 +137,9 @@
         var centerX = canvas.width / 2;
         var centerY = canvas.height / 2;
 
-        var maxSize = 300;
+        
+
+        var maxSize = (canvas.width < canvas.height ? canvas.width : canvas.height)/2;
         var minSize = 130;
         var variableAmount = maxSize - minSize;
         var percentage = (currentTime/totalTime  * 100);
