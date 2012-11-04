@@ -53,6 +53,7 @@
     <AppxManifest Include="package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <Content Include="audio.html" />
     <Content Include="default.html" />
     <Content Include="EndBeep.mp3" />
     <Content Include="images\logo.png" />

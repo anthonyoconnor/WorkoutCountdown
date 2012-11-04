@@ -8,6 +8,11 @@
     var app = WinJS.Application;
     var activation = Windows.ApplicationModel.Activation;
 
+    app.onsettings = function (e) {
+        e.detail.applicationcommands = { "audio": { title: "Audio", href: "/audio.html" } };
+        WinJS.UI.SettingsFlyout.populateSettings(e);
+    }
+
     app.onactivated = function (args) {
         if (args.detail.kind === activation.ActivationKind.launch) {
             if (args.detail.previousExecutionState !== activation.ApplicationExecutionState.terminated) {
@@ -80,6 +85,7 @@
     function start(eventInfo) {
         document.getElementById("startButton").style.display = "none";
         document.getElementById("stopButton").style.display = "inline";
+       // document.getElementById("options").style.display = "none";
 
         reset();
 
@@ -199,6 +205,9 @@
         context.lineTo(canvas.height, centerY);
 
         context.stroke();
+    }
+
+    function toggleAudio() {
     }
 
     app.start();

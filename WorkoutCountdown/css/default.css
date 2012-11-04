@@ -12,6 +12,8 @@
 }
 
 .options {
+        margin-left: auto;
+    margin-right: auto;
 }
 
 .buttons {
@@ -33,3 +35,18 @@
 
 @media screen and (-ms-view-state: fullscreen-portrait) {
 }
+
+/*.win-settingsflyout .win-header {
+    background-color: #00b2f0;
+}
+
+
+.win-header .win-backbutton:hover:active {
+    color: #00b2f0;
+}
+
+
+input[type="checkbox"].differentCheckboxColor::-ms-check
+{
+    color: green;
+}*/
