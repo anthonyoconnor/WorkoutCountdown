@@ -16,6 +16,18 @@
             } else {
                 // TODO: This application has been reactivated from suspension.
                 // Restore application state here.
+
+                var countdownSecondsIndex = app.sessionState.countdownIndex;
+                if (countdownSecondsIndex != undefined) {
+                    var element = document.getElementById("countdownSeconds");
+                    element.selectedIndex = countdownSecondsIndex;
+                }
+
+                var restIndex = app.sessionState.restIndex;
+                if (restIndex != undefined) {
+                    var element = document.getElementById("restIntervalSeconds");
+                    element.selectedIndex = restIndex;
+                }
             }
             args.setPromise(WinJS.UI.processAll());
 
@@ -36,6 +48,12 @@
         // saved and restored across suspension. If you need to complete an
         // asynchronous operation before your application is suspended, call
         // args.setPromise().
+
+        var countdownElement = document.getElementById("countdownSeconds");
+        app.sessionState.countdownIndex = countdownElement.selectedIndex;
+
+        var restElement = document.getElementById("restIntervalSeconds");
+        app.sessionState.restIndex = restElement.selectedIndex;
     };
 
     function onkeyup(e) {
@@ -131,7 +149,7 @@
     }
 
     function showCountdownTime() {
-        showTime(currentCountdown, countdownSetting, false, "red");
+        showTime(currentCountdown, countdownSetting, false, "green");
     }
 
     function showIntervalTime() {
