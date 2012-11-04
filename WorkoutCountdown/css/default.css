@@ -9,7 +9,6 @@
 .controls {
     margin-top: 31px;
     margin-left: 120px;
-    margin-bottom: 50px;
 }
 
 .options {
@@ -20,7 +19,7 @@
 }
 
 .countdown {
-
+       text-align: center;
 }
 
 @media screen and (-ms-view-state: fullscreen-landscape) {
