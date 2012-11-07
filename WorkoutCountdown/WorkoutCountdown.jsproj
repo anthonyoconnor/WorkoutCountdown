@@ -53,14 +53,14 @@
     <AppxManifest Include="package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    <Content Include="audio.html" />
+    <Content Include="options.html" />
     <Content Include="default.html" />
     <Content Include="EndBeep.mp3" />
     <Content Include="images\logo.png" />
     <Content Include="images\smalllogo.png" />
     <Content Include="images\splashscreen.png" />
     <Content Include="images\storelogo.png" />
-    <Content Include="js\audio.js" />
+    <Content Include="js\options.js" />
     <Content Include="js\default.js" />
     <Content Include="css\default.css" />
     <None Include="WorkoutCountdown_TemporaryKey.pfx" />

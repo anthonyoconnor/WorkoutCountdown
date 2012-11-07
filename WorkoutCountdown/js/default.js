@@ -9,7 +9,7 @@
     var activation = Windows.ApplicationModel.Activation;
 
     app.onsettings = function (e) {
-        e.detail.applicationcommands = { "audio": { title: "Audio", href: "/audio.html" } };
+        e.detail.applicationcommands = { "options": { title: "Options", href: "/options.html" } };
         WinJS.UI.SettingsFlyout.populateSettings(e);
     }
 
