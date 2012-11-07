@@ -22,51 +22,36 @@
                 // TODO: This application has been reactivated from suspension.
                 // Restore application state here.
 
-                var countdownSecondsIndex = app.sessionState.countdownIndex;
-                if (countdownSecondsIndex != undefined) {
-                    var element = document.getElementById("countdownSeconds");
-                    element.selectedIndex = countdownSecondsIndex;
-                }
+                var appData = Windows.Storage.ApplicationData.current.localSettings;
 
-                var restIndex = app.sessionState.restIndex;
-                if (restIndex != undefined) {
-                    var element = document.getElementById("restIntervalSeconds");
-                    element.selectedIndex = restIndex;
-                }
-
-                var playAudioFlag = app.sessionState.playAudioFlag;
-                if (playAudioFlag != undefined) {
-                    playAudio = playAudioFlag;
+                if (appData.values.size > 0) {
+                    if (appData.values["audioFlag"] !== undefined) {
+                        playAudio = appData.values["audioFlag"];
+                    }
+                    if (appData.values["countdown"] !== undefined) {
+                        countdownValue = appData.values["countdown"];
+                    }
+                    if (appData.values["restInterval"] !== undefined) {
+                        restIntervalValue = appData.values["restInterval"];
+                    }
                 }
             }
-            args.setPromise(WinJS.UI.processAll());
-
-            var startButton = document.getElementById("startButton");
-            startButton.addEventListener("click", start, false);
-
-            var stopButton = document.getElementById("stopButton");
-            stopButton.addEventListener("click", stop, false);
-
-            document.onkeyup = onkeyup;
         }
-    };
+        args.setPromise(WinJS.UI.processAll());
+
+        var startButton = document.getElementById("startButton");
+        startButton.addEventListener("click", start, false);
+
+        var stopButton = document.getElementById("stopButton");
+        stopButton.addEventListener("click", stop, false);
+
+        document.onkeyup = onkeyup;
+    }
+
 
     app.oncheckpoint = function (args) {
-        // TODO: This application is about to be suspended. Save any state
-        // that needs to persist across suspensions here. You might use the
-        // WinJS.Application.sessionState object, which is automatically
-        // saved and restored across suspension. If you need to complete an
-        // asynchronous operation before your application is suspended, call
-        // args.setPromise().
 
-        var countdownElement = document.getElementById("countdownSeconds");
-        app.sessionState.countdownIndex = countdownElement.selectedIndex;
-
-        var restElement = document.getElementById("restIntervalSeconds");
-        app.sessionState.restIndex = restElement.selectedIndex;
-
-        app.sessionState.playAudioFlag = playAudio;
-    };
+    }
 
     function onkeyup(e) {
         var unicode = e.keyCode ? e.keyCode : e.charCode
@@ -92,7 +77,7 @@
     function start(eventInfo) {
         document.getElementById("startButton").style.display = "none";
         document.getElementById("stopButton").style.display = "inline";
-       // document.getElementById("options").style.display = "none";
+        // document.getElementById("options").style.display = "none";
 
         reset();
 
@@ -108,9 +93,9 @@
     }
 
     function reset() {
-        countdownSetting = document.getElementById("countdownSeconds").value;
+        countdownSetting = countdownValue;
         currentCountdown = countdownSetting;
-        intervalSetting = document.getElementById("restIntervalSeconds").value;
+        intervalSetting = countdownValue;
         currentInterval = intervalSetting;
 
         showCountdownTime();
@@ -144,7 +129,6 @@
         }
     }
 
-
     function updateIntervalCountdown() {
         if (!running)
             return;
@@ -177,23 +161,22 @@
         var centerX = canvas.width / 2;
         var centerY = canvas.height / 2;
 
-        var maxSize = (canvas.width < canvas.height ? canvas.width : canvas.height)/2;
+        var maxSize = (canvas.width < canvas.height ? canvas.width : canvas.height) / 2;
         var minSize = 130;
         var variableAmount = maxSize - minSize;
-        var percentage = (currentTime/totalTime  * 100);
+        var percentage = (currentTime / totalTime * 100);
         var amountToShow = variableAmount / 100 * percentage;
 
         var fullAmountToShow = amountToShow + minSize
-        
-        if (increase == true)
-        {
+
+        if (increase == true) {
             fullAmountToShow = (maxSize - fullAmountToShow) + minSize;
         }
         context.clearRect(0, 0, canvas.width, canvas.height);
 
         context.beginPath();
         context.fillStyle = colour;
- 
+
         context.arc(centerX, centerY, fullAmountToShow, 0, 2 * Math.PI, true);
         context.fill();
 
@@ -223,6 +206,6 @@
 })();
 
 var playAudio = true;
-function toggleAudio() {
-    playAudio = event.srcElement.checked;
-}
+var countdownValue = 60;
+var restIntervalValue = 15;
+

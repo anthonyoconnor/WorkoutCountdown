@@ -13,21 +13,29 @@
                     audio.checked = appData.values["audioFlag"];
                 }
                 if (appData.values["countdown"] !== undefined) {
-                    countdown.selectedIndex = appData.values["countdown"];
+                    for (var i = 0; i < countdown.length; i++) {
+                        if (countdown[i].value == appData.values["countdown"]) {
+                            countdown[i].selected = true;
+                        }
+                    }
                 }
                 if (appData.values["restInterval"] !== undefined) {
-                    countdown.selectedIndex = appData.values["restInterval"];
+                    for (var i = 0; i < restInterval.length; i++) {
+                        if (restInterval[i].value == appData.values["restInterval"]) {
+                            restInterval[i].selected = true;
+                        }
+                    }
                 }
             }
 
             audio.onchange = function () {
-                appData.values["audioFlag"] = audio.checked;
+                playAudio = appData.values["audioFlag"] = audio.checked;
             };
             countdown.onchange = function () {
-                appData.values["countdown"] = countdown.selectedIndex;
+                countdownValue = appData.values["countdown"] = countdown.value;
             };
             restInterval.onchange = function () {
-                appData.values["restInterval"] = restInterval.selectedIndex;
+                restIntervalValue = appData.values["restInterval"] = restInterval.value;
             };
         },
         unload: function () {
