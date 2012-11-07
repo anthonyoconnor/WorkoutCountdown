@@ -1,23 +1,9 @@
 ﻿body {
 }
 
-.header {
-    margin-top: 45px;
-    margin-left: 120px;
-}
-
 .controls {
     margin-top: 31px;
     margin-left: 120px;
-}
-
-.options {
-        margin-left: auto;
-    margin-right: auto;
-}
-
-.buttons {
-    margin-top: 30px;
 }
 
 .countdown {

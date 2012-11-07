@@ -16,11 +16,9 @@
     app.onactivated = function (args) {
         if (args.detail.kind === activation.ActivationKind.launch) {
             if (args.detail.previousExecutionState !== activation.ApplicationExecutionState.terminated) {
-                // TODO: This application has been newly launched. Initialize
-                // your application here.
+                // Tapplication has been newly launched. 
             } else {
-                // TODO: This application has been reactivated from suspension.
-                // Restore application state here.
+                // application has been reactivated from suspension.
 
                 var appData = Windows.Storage.ApplicationData.current.localSettings;
 
@@ -48,11 +46,6 @@
         document.onkeyup = onkeyup;
     }
 
-
-    app.oncheckpoint = function (args) {
-
-    }
-
     function onkeyup(e) {
         var unicode = e.keyCode ? e.keyCode : e.charCode
         if (unicode == 32) {
@@ -77,7 +70,6 @@
     function start(eventInfo) {
         document.getElementById("startButton").style.display = "none";
         document.getElementById("stopButton").style.display = "inline";
-        // document.getElementById("options").style.display = "none";
 
         reset();
 
@@ -197,9 +189,6 @@
         context.lineTo(canvas.height, centerY);
 
         context.stroke();
-    }
-
-    function toggleAudio() {
     }
 
     app.start();
