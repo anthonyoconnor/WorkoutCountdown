@@ -16,45 +16,49 @@
     app.onactivated = function (args) {
         if (args.detail.kind === activation.ActivationKind.launch) {
             if (args.detail.previousExecutionState !== activation.ApplicationExecutionState.terminated) {
-                // Tapplication has been newly launched. 
+                // application has been newly launched. 
             } else {
                 // application has been reactivated from suspension.
+            }
+        }
 
-                var appData = Windows.Storage.ApplicationData.current.localSettings;
+        var appData = Windows.Storage.ApplicationData.current.localSettings;
 
-                if (appData.values.size > 0) {
-                    if (appData.values["audioFlag"] !== undefined) {
-                        playAudio = appData.values["audioFlag"];
-                    }
-                    if (appData.values["countdown"] !== undefined) {
-                        countdownValue = appData.values["countdown"];
-                    }
-                    if (appData.values["restInterval"] !== undefined) {
-                        restIntervalValue = appData.values["restInterval"];
-                    }
-                }
+        if (appData.values.size > 0) {
+            if (appData.values["audioFlag"] !== undefined) {
+                playAudio = appData.values["audioFlag"];
+            }
+            if (appData.values["countdown"] !== undefined) {
+                countdownValue = appData.values["countdown"];
+            }
+            if (appData.values["restInterval"] !== undefined) {
+                restIntervalValue = appData.values["restInterval"];
             }
         }
         args.setPromise(WinJS.UI.processAll());
 
-        var startButton = document.getElementById("startButton");
-        startButton.addEventListener("click", start, false);
-
-        var stopButton = document.getElementById("stopButton");
-        stopButton.addEventListener("click", stop, false);
-
         document.onkeyup = onkeyup;
+
+        var countdownElement = document.getElementById("clickable");
+
+        countdownElement.addEventListener("click", toggleRunning, false);
+
+        reset();
     }
 
     function onkeyup(e) {
         var unicode = e.keyCode ? e.keyCode : e.charCode
         if (unicode == 32) {
-            if (running) {
-                stop();
-            }
-            else {
-                start();
-            }
+            toggleRunning();
+        }
+    }
+
+    function toggleRunning() {
+        if (running) {
+            stop();
+        }
+        else {
+            start();
         }
     }
 
@@ -68,9 +72,6 @@
     var running;
 
     function start(eventInfo) {
-        document.getElementById("startButton").style.display = "none";
-        document.getElementById("stopButton").style.display = "inline";
-
         reset();
 
         running = true;
@@ -80,14 +81,12 @@
     function stop(eventInfo) {
         running = false;
         reset();
-        document.getElementById("stopButton").style.display = "none";
-        document.getElementById("startButton").style.display = "inline";
     }
 
     function reset() {
         countdownSetting = countdownValue;
         currentCountdown = countdownSetting;
-        intervalSetting = countdownValue;
+        intervalSetting = restIntervalValue;
         currentInterval = intervalSetting;
 
         showCountdownTime();
